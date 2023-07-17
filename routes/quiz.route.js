@@ -41,4 +41,23 @@ quizRouter.put('/:quizId', async (req, res) => {
   }
 });
 
+quizRouter.get("/allquiz", async (req, res) => {
+  try {
+    const users = await Quiz.find();
+    res.status(200).send(users)
+  } catch (error) {
+    res.status(400).send({ "msg": error.message })
+  }
+})
+
+quizRouter.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const users = await Quiz.findById(id);
+    res.status(200).send(users)
+  } catch (error) {
+    res.status(400).send({ "msg": error.message })
+  }
+})
+
 module.exports = {quizRouter};
